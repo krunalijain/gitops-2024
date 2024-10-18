@@ -23,6 +23,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: "./terraform"
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -44,4 +45,4 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan 
-      run: terraform -chdir="./terraform" plan -input=false
+      run: terraform plan -input=false
