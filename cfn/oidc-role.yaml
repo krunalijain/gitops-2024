@@ -1,4 +1,4 @@
-/workspaces/gitops-2024/gitops-minicamp-2024-tfParameters:
+Parameters:
   Repo:
     Description: The GitHub organization/repo for which the OIDC provider is set up
     Type: String
