@@ -1,5 +1,11 @@
 name: 'Terraform'
 
+# Set AWS credentials globally for all steps
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+
 on:
   push:
     branches: [ 'main' ]
@@ -7,7 +13,6 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
   terraform:
@@ -18,15 +23,9 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./terraform
 
     steps:
     # Checkout the repository to the GitHub Actions runner
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
-        aws-region: us-east-1
 
     - name: Checkout
       uses: actions/checkout@v4
@@ -44,5 +43,5 @@ jobs:
       run: terraform fmt -check
 
     # Generates an execution plan for Terraform
-    - name: Terraform Plan  
+    - name: Terraform Plan 
       run: terraform plan -input=false
