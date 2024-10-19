@@ -46,4 +46,4 @@ jobs:
 
     # Destroy the configuration
     - name: Terraform Destroy
-      run: terraform destroy -input=false -autp-approve
+      run: terraform destroy -input=false -auto-approve
