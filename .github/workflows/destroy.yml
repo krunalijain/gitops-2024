@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Destroy'
 
 # Set AWS credentials globally for all steps
 env:
@@ -6,10 +6,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 
-on:
-  push:
-    branches: [ 'main' ]
-  pull_request:
+on: workflow_dispatch
 
 permissions:
   contents: read
@@ -46,3 +43,7 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan 
       run: terraform plan -input=false
+
+    # Destroy the configuration
+    - name: Terraform Destroy
+      run: terraform destroy -input=false -autp-approve
